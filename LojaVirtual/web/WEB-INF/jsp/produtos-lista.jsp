@@ -23,14 +23,16 @@
             %>
             <div>
                 <p><%=produto.getNome() %></p>
-                <img src ="/imagens/download<%=produto.getId() %>.jpg" 
+                <img src ="/imagens/0<%=produto.getId() %>.jpg" 
                 alt = "produto <%=produto.getId() %>">
                 <p>R$ <%=produto.getId() %></p> 
 
             </div>
 
-
+<%
             }
+                
+                %>
         </div>
     </body>
 </html>
