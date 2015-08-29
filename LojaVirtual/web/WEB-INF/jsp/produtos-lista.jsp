@@ -3,7 +3,8 @@
     Created on : 14/08/2015, 21:05:47
     Author     : thays.souza
 --%>
-
+<%@taglib prefix="c"
+          uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="java.util.List"%>
 <%@page import="br.pucpr.prog4.loja.models.Produto"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
@@ -16,23 +17,16 @@
     </head>
     <body>
         <div>
-            <%
-                List<Produto>produtos;
-                produtos =(List<Produto>)request.getAttribute("produtos");
-                for(Produto produto : produtos){
-            %>
-            <div>
-                <p><%=produto.getNome() %></p>
-                <img src ="/imagens/0<%=produto.getId() %>.jpg" 
-                alt = "produto <%=produto.getId() %>">
-                <p>R$ <%=produto.getId() %></p> 
+            <c:forEach var="produto" items="${produtos}">
+                <div>
+                    <p>${produto.nome} </p>
+                    <a href="produto-detalhe?id = ${produto.id}">
+                    <img src ="./imagens/0${produto.id}.jpg" 
+                    alt = "produto ${produto.id}">
+                    <p>R$ ${produto.preco} </p> 
 
-            </div>
-
-<%
-            }
-                
-                %>
+                </div>
+            </c:forEach>       
         </div>
     </body>
 </html>
