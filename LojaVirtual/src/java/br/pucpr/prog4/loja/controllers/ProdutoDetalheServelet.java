@@ -9,7 +9,6 @@ import br.pucpr.prog4.loja.models.IProdutoManager;
 import br.pucpr.prog4.loja.models.Produto;
 import br.pucpr.prog4.loja.models.ProdutoManager;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,26 +17,36 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author thays.souza
+ * @author thays
  */
-public class ProdutosListaServlet extends HttpServlet {
+public class ProdutoDetalheServelet extends HttpServlet {
 
-   
+ 
+  
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            IProdutoManager manager;
-            List<Produto>produtos;
-            manager = new ProdutoManager();
-            produtos = manager.obterTodos();
-            
-            request.setAttribute("produtos", produtos);
-            RequestDispatcher rd;
-            rd = request.getRequestDispatcher("/WEB-INF/jsp/produtos-lista.jsp");
-            rd.forward(request, response);
-            
+        int id;
+        String idParam;
+        idParam = request.getParameter("id");
+        id = Integer.parseInt(idParam);
+        
+        IProdutoManager manager;
+        manager = new ProdutoManager();
+        
+        Produto produto;
+        produto = manager.obterPorId(id);
+        
+        String view;
+        view = "/WEB-INF/jsp/produto-detalhe.jsp";
+        RequestDispatcher rd;
+        rd = request.getRequestDispatcher(view);
+        rd.forward(request, response);
+        
+      
     }
 
-
+  
 
 }
