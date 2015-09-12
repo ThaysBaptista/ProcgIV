@@ -5,10 +5,14 @@
  */
 package br.pucpr.prog4.loja.controllers;
 
+import br.pucpr.prog4.loja.models.ClienteManager;
+import br.pucpr.prog4.loja.models.ClienteManagerIMPL;
 import br.pucpr.prog4.loja.models.Pessoa;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,9 +56,15 @@ public class ClienteServelet extends HttpServlet {
             Date dataNascimento = sdf.parse(request.getParameter("dataNascimento"));
             pessoa.setDataNasc(dataNascimento);
         } catch (Exception e) {
+            Logger.getLogger(ClienteServelet.class.getName()).log(Level.SEVERE,null,ex);
             
         }
         pessoa.setTipoPessoa("sexo");
+        pessoa.setTipoPessoa("pessoa");
+        
+        ClienteManager manager;
+        manager = new ClienteManagerIMPL();
+        manager.cadastrar(pessoa);
         
         
         
